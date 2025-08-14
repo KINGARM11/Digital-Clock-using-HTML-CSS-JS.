@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body {
+            background-color: black;
+            animation: rotu 5s linear alternate-reverse infinite;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .clock-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+            font-size: 85px;
+            font-weight: bolder;
+            animation: rot 5s linear alternate infinite;
+            border: 5px solid white;
+            width: 700px;
+            padding: 20px;
+            box-shadow: 5px 5px 46px 28px white;
+            text-align: center;
+        }
+
+        @keyframes rot {
+            0% {
+                transform: translateX(-10px);
+                background-color: chartreuse;
+            }
+
+            100% {
+                transform: translateX(800px);
+                background-color: rgb(9, 134, 236);
+            }
+        }
+
+        @keyframes rotu {
+            0% {
+                background-color: rgb(0, 0, 0);
+            }
+
+            100% {
+                background-color: rgb(250, 163, 233);
+            }
+        }
+
+        .day {
+            font-size: 35px;
+            color: #710965;
+            margin-bottom: 20px;
+        }
+
+        .date {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .time {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            color: #ff0e0e;
+        }
+
+        .pm {
+            font-size: 35px;
+            margin-left: 10px;
+        }
+
+        h1, h2 {
+            margin: 0;
+        }
+
+        h1 {
+            color: blue;
+            font-size: 50px;
+            text-decoration: underline;
+            font-weight: bolder;
+            display: flex;
+            justify-content: center;
+        }
+
+        h2 {
+            color: #0bff34;
+            font-size: 50px;
+            text-decoration: underline;
+            font-weight: bolder;
+            display: flex;
+            justify-content: center;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <marquee behavior="" direction="" scrollamount="8">
+        <h1>DIGITAL CLOCK (Using HTML, CSS, JavaScript)</h1>
+        <h2>(24 Hr Format)</h2>
+    </marquee>
+    <div class="clock-container">
+        <div class="day">Day</div>
+        <div class="date">
+            <span class="dateD">00</span>-
+            <span class="dateM">00</span>-
+            <span class="dateY">00</span>
+        </div>
+        <div class="time">
+            <span class="hr">00</span>:
+            <span class="min">00</span>:
+            <span class="sec">00</span>
+            <span class="pm">PM</span>
+        </div>
+    </div>
+
+    <script>
+        setInterval(function () {
+            let hour = document.querySelector('.hr');
+            let min = document.querySelector('.min');
+            let second = document.querySelector('.sec');
+            let pm = document.querySelector(".pm");
+            let dated = document.querySelector(".dateD");
+            let datem = document.querySelector(".dateM");
+            let datey = document.querySelector(".dateY");
+
+            let date = new Date();
+            let H = date.getHours();
+            let M = date.getMinutes();
+            let S = date.getSeconds();
+            let d = date.getDate();
+            let m = date.getMonth();
+            let y = date.getFullYear();
+
+            hour.innerHTML = H < 10 ? "0" + H : H;
+            min.innerHTML = M < 10 ? "0" + M : M;
+            second.innerHTML = S < 10 ? "0" + S : S;
+            dated.innerHTML = d < 10 ? "0" + d : d;
+            datem.innerHTML = (m + 1) < 10 ? "0" + (m + 1) : (m + 1); // Months are zero-based, so we add 1
+            datey.innerHTML = y;
+
+            pm.innerHTML = H >= 12 && H < 24 ? "PM" : "AM";
+
+            let days = document.querySelector('.day');
+            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            days.innerHTML = dayNames[date.getDay()];
+        }, 1000);
+    </script>
+</body>
+
+</html>
